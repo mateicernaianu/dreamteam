@@ -1,0 +1,9 @@
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\bin\Debug\mps_proiect.exe.config
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\bin\Debug\mps_proiect.exe
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\bin\Debug\mps_proiect.pdb
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.csprojResolveAssemblyReference.cache
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.Form1.resources
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.Properties.Resources.resources
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.csproj.GenerateResource.Cache
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.exe
+c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.pdb

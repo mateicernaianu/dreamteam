@@ -1,0 +1,13 @@
+CREARE .EXE FILE:
+	1 - selectezi in Solution Configuration din "Debug" in "Release"
+	2 - dai build 
+	3 - o sa gasesti fisierul executabil mps_proiect.exe in <disk>:\dreamteam\mps_proiect\bin\Release
+	
+CREARE DAEMON:
+	1 - creare .EXE file
+	2 - navighezi in fisierul <disk>:\dreamteam\mps_proiect\bin\Release
+	3 - click dreapta pe mps_proiect.exe, Create shortcut
+	4 - copiezi shortcut-ul creat in C:\Users\<user>\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+	5 - log out / sign out
+	6 - log in, programul ar trebui sa apara dupa cateva secunde
+	

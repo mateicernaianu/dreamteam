@@ -7,3 +7,23 @@ c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\ob
 c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.csproj.GenerateResource.Cache
 c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.exe
 c:\users\amalia\documents\visual studio 2015\Projects\mps_proiect\mps_proiect\obj\Debug\mps_proiect.pdb
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\mps_proiect.exe.config
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\mps_proiect.exe
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\mps_proiect.pdb
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\Interop.AXVLC.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\AxInterop.AXVLC.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.csprojResolveAssemblyReference.cache
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.AXVLC.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\AxInterop.AXVLC.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.csproj.ResolveComReference.cache
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.Form1.resources
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.Properties.Resources.resources
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.csproj.GenerateResource.Cache
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.exe
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.pdb
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.MediaPlayer.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.WMLSS.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.WMPDXMLib.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.WMPLauncher.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.WMPLib.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.WMPNSSCI.dll

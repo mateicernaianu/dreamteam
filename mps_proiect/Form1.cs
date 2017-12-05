@@ -13,6 +13,8 @@ using System.Net;
 using System.IO;
 using System.Net.Sockets;
 using Microsoft.Win32;
+using WMPLib;
+using System.Diagnostics;
 
 namespace mps_proiect
 {
@@ -20,7 +22,8 @@ namespace mps_proiect
     {
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
-      
+        WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+
         public Form1()
         {
             InitializeComponent();
@@ -50,7 +53,9 @@ namespace mps_proiect
                 "mona ip address",
                 "mona internet connection",
                 "goodbye mona",
-                "mona battery life"
+                "mona battery life",
+                "mona show image",
+                "mona hide image"
             });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -114,6 +119,22 @@ namespace mps_proiect
                     batterystatus = SystemInformation.PowerStatus.BatteryChargeStatus.ToString();
 
                     synthesizer.SpeakAsync("battery charge status is" + batterystatus);
+                    break;
+                case "mona show image":
+                    richTextBox1.Text += "\nShow Image";
+                    Process.Start("mspaint", @"""C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\9.jpg""");
+                    break;
+                case "mona hide image":
+                    richTextBox1.Text += "\nHide Image";
+                    System.Diagnostics.Process[] procs = null;
+          
+                    procs = Process.GetProcessesByName("mspaint");
+
+                    if (!procs[0].HasExited)
+                    {
+                        procs[0].Kill();
+                    }
+                   
                     break;
             }
         }

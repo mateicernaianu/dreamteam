@@ -13,8 +13,8 @@ using System.Net;
 using System.IO;
 using System.Net.Sockets;
 using Microsoft.Win32;
-using WMPLib;
 using System.Diagnostics;
+using Outlook = Microsoft.Office.Interop.Outlook;
 
 namespace mps_proiect
 {
@@ -28,6 +28,8 @@ namespace mps_proiect
         {
             InitializeComponent();
             synthesizer.SelectVoiceByHints(VoiceGender.Female);
+            wplayer.settings.autoStart = false;
+            wplayer.URL = @"C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\play1.mp3";
         }
 
 
@@ -40,7 +42,6 @@ namespace mps_proiect
         private void btnEnable_Click(object sender, EventArgs e)
         {
             //start recognize multiple commands
-            recEngine.RecognizeAsync(RecognizeMode.Multiple);
             btnDisable.Enabled = true;
         }
 
@@ -55,19 +56,30 @@ namespace mps_proiect
                 "goodbye mona",
                 "mona battery life",
                 "mona show image",
-                "mona hide image"
+                "mona hide image",
+                "mona play",
+                "mona stop",
+                "mona open chrome",
+                "mona close chrome",
+                "mona open outlook",
+                "mona close outlook"
             });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
             Grammar grammar = new Grammar(gBuilder);
 
             recEngine.LoadGrammarAsync(grammar);
+            //recEngine.RecognizeAsync(RecognizeMode.Multiple);
+            recEngine.SpeechRecognized +=
+              new EventHandler<SpeechRecognizedEventArgs>(
+                SpeechRecognizedHandler);
             recEngine.SetInputToDefaultAudioDevice();
-            recEngine.SpeechRecognized += recEngine_SpeechRecognized;
+
+            recEngine.RecognizeAsync(RecognizeMode.Multiple);
             
         }
 
-        void recEngine_SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
+        void SpeechRecognizedHandler(object sender, SpeechRecognizedEventArgs e)
         {
             switch (e.Result.Text)
             {
@@ -130,13 +142,65 @@ namespace mps_proiect
           
                     procs = Process.GetProcessesByName("mspaint");
 
+                    /*
+                     * An exception of type 'System.IndexOutOfRangeException' occurred in mps_proiect.exe but was not handled in user code
+                        PUNE TRY CATCH
+                        */
                     if (!procs[0].HasExited)
                     {
                         procs[0].Kill();
                     }
-                   
+                    break;
+                case "mona play":
+                    richTextBox1.Text += "\nPlay";
+                    wplayer.controls.play();
+                    break;
+                case "mona stop":
+                    richTextBox1.Text += "\nStop";
+                    wplayer.controls.pause();
+                    break;
+                case "mona open chrome":
+                    richTextBox1.Text += "\nOpen chrome";
+                    Process chromeProcess = new Process();
+
+                    chromeProcess.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+                    chromeProcess.StartInfo.Arguments = "google.com" + " --new-window";
+
+                    chromeProcess.Start();
+                    break;
+                case "mona close chrome":
+                    richTextBox1.Text += "\nClose chrome";
+                    Process[] chromeInstances = Process.GetProcessesByName("chrome");
+
+                    foreach (Process chromeProc in chromeInstances)
+                        chromeProc.Kill();
+                    break;
+                case "mona open outlook":
+                    richTextBox1.Text += "\nOpen outlook";
+                    Process.Start(@"C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE");
+                    break;
+                case "mona close outlook":
+                    richTextBox1.Text += "\nClose outlook";
+                    if (Process.GetProcessesByName("outlook").Length != 0)
+                    {
+                        foreach (var outlookProc in Process.GetProcessesByName("outlook"))
+                        {
+                            outlookProc.Kill();
+                        }
+                    }
                     break;
             }
+        }
+
+        private void testButtonPlay_Click(object sender, EventArgs e)
+        {
+            wplayer.controls.play();
+        }
+
+        private void testButtonStop_Click(object sender, EventArgs e)
+        {
+            //wplayer.controls.stop();
+            wplayer.controls.pause();
         }
     }
 }

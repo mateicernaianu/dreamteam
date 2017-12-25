@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -15,6 +17,10 @@ using System.Net.Sockets;
 using Microsoft.Win32;
 using System.Diagnostics;
 using Outlook = Microsoft.Office.Interop.Outlook;
+using System.Globalization;
+using System.Text.RegularExpressions;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace mps_proiect
 {
@@ -62,7 +68,20 @@ namespace mps_proiect
                 "mona open chrome",
                 "mona close chrome",
                 "mona open outlook",
-                "mona close outlook"
+                "mona close outlook",
+                "mona exchange",
+                "mona exchange euro",
+                "mona exchange dollar",
+                "mona exchange pounds",
+                "mona exchange ron to euro",
+                "mona exchange ron to dollar",
+                "mona exchange ron to pounds",
+                "mona exchange euro to dollar",
+                "mona exchange dollar to euro",
+                "mona exchange euro to pounds",
+                "mona exchange dollar to pounds",
+                "mona exchange pounds to euro",
+                "mona exchange pounds to dollar"
             });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -189,6 +208,45 @@ namespace mps_proiect
                         }
                     }
                     break;
+                case "mona exchange euro":
+                    richTextBox1.Text += "\n" + "One euro is " + ConvertCurrency("EUR", "RON") + " ron";
+                    synthesizer.SpeakAsync("One euro is " + ConvertCurrency("EUR","RON") + " ron");
+                    break;
+                case "mona exchange dollar":
+                    richTextBox1.Text += "\n" + "One dollar is " + ConvertCurrency("USD", "RON") + " ron";
+                    synthesizer.SpeakAsync("One dollar is " + ConvertCurrency("USD", "RON") + " ron");
+                    break;
+                case "mona exchange pounds":
+                    synthesizer.SpeakAsync("One pound is " + ConvertCurrency("GBP", "RON") + " ron");
+                    break;
+                case "mona exchange ron to euro":
+                    synthesizer.SpeakAsync("One ron is " + ConvertCurrency("RON", "EUR") + " euro");
+                    break;
+                case "mona exchange ron to dollar":
+                    synthesizer.SpeakAsync("One ron is " + ConvertCurrency("RON", "USD") + " usd");
+                    break;
+                case "mona exchange ron to pounds":
+                    synthesizer.SpeakAsync("One ron is " + ConvertCurrency("RON", "GBP") + " pounds");
+                    break;
+                case "mona exchange euro to dollar":
+                    richTextBox1.Text += "\n" + "One euro is " + ConvertCurrency("EUR", "USD") + " usd";
+                    synthesizer.SpeakAsync("One euro is " + ConvertCurrency("EUR", "USD") + " usd");
+                    break;
+                case "mona exchange dollar to euro":
+                    synthesizer.SpeakAsync("One usd is " + ConvertCurrency("USD", "EUR") + " euro");
+                    break;
+                case "mona exchange euro to pounds":
+                    synthesizer.SpeakAsync("One euro is " + ConvertCurrency("EUR", "GBP") + " pounds");
+                    break;
+                case "mona exchange dollar to pounds":
+                    synthesizer.SpeakAsync("One usd is " + ConvertCurrency("USD", "GBP") + " pounds");
+                    break;
+                case "mona exchange pounds to euro":
+                    synthesizer.SpeakAsync("One pound is " + ConvertCurrency("GBP", "EUR") + " euro");
+                    break;
+                case "mona exchange pounds to dollar":
+                    synthesizer.SpeakAsync("One pound is " + ConvertCurrency("GBP", "USD") + " usd");
+                    break;
             }
         }
 
@@ -202,5 +260,33 @@ namespace mps_proiect
             //wplayer.controls.stop();
             wplayer.controls.pause();
         }
+
+        public static String ConvertCurrency(string fromCurrency, string toCurrency)
+        {
+            string URL = String.Format("http://api.fixer.io/latest?symbols={0}&base={1}", toCurrency, fromCurrency).ToString();
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            try
+            {
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    JObject obj = (JObject)JsonConvert.DeserializeObject(reader.ReadLine().ToString());
+                    return obj.SelectToken("rates." + toCurrency).ToString();
+                }
+            }
+            catch (WebException ex)
+            {
+                WebResponse errorResponse = ex.Response;
+                using (Stream responseStream = errorResponse.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                    String errorText = reader.ReadToEnd();
+                }
+                throw;
+            }
+        }
     }
 }
+

@@ -21,6 +21,7 @@ using System.Globalization;
 using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using YoutubeSearch;
 
 namespace mps_proiect
 {
@@ -29,6 +30,10 @@ namespace mps_proiect
         SpeechRecognitionEngine recEngine = new SpeechRecognitionEngine();
         SpeechSynthesizer synthesizer = new SpeechSynthesizer();
         WMPLib.WindowsMediaPlayer wplayer = new WMPLib.WindowsMediaPlayer();
+        Choices commands = new Choices();
+        List<string> listOfCommands;
+        string demoUsername = "demo > ";
+        string monaUsername = "mona < ";
 
         public Form1()
         {
@@ -39,23 +44,21 @@ namespace mps_proiect
         }
 
 
-        private void btnDisable_Click(object sender, EventArgs e)
+       /* private void btnDisable_Click(object sender, EventArgs e)
         {
             recEngine.RecognizeAsyncStop();
-            btnDisable.Enabled = false;
+           // btnDisable.Enabled = false;
         }
 
         private void btnEnable_Click(object sender, EventArgs e)
         {
             //start recognize multiple commands
-            btnDisable.Enabled = true;
-        }
+           // btnDisable.Enabled = true;
+        }*/
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Choices commands = new Choices();
-            commands.Add(new string[] {
-                "mona print my name",
+            listOfCommands = new List<string> {
                 "mona datetime please",
                 "mona ip address",
                 "mona internet connection",
@@ -63,8 +66,8 @@ namespace mps_proiect
                 "mona battery life",
                 "mona show image",
                 "mona hide image",
-                "mona play",
-                "mona stop",
+                "mona play music",
+                "mona stop music",
                 "mona open chrome",
                 "mona close chrome",
                 "mona open outlook",
@@ -81,12 +84,48 @@ namespace mps_proiect
                 "mona exchange euro to pounds",
                 "mona exchange dollar to pounds",
                 "mona exchange pounds to euro",
-                "mona exchange pounds to dollar"
+                "mona exchange pounds to dollar",
+                "mona play jazz",
+                "mona play latino",
+                "mona play rock",
+                "mona stop youtube" };
+
+            commands.Add(new string[] {
+                "mona datetime please",
+                "mona ip address",
+                "mona internet connection",
+                "goodbye mona",
+                "mona battery life",
+                "mona show image",
+                "mona hide image",
+                "mona play music",
+                "mona stop music",
+                "mona open chrome",
+                "mona close chrome",
+                "mona open outlook",
+                "mona close outlook",
+                "mona exchange",
+                "mona exchange euro",
+                "mona exchange dollar",
+                "mona exchange pounds",
+                "mona exchange ron to euro",
+                "mona exchange ron to dollar",
+                "mona exchange ron to pounds",
+                "mona exchange euro to dollar",
+                "mona exchange dollar to euro",
+                "mona exchange euro to pounds",
+                "mona exchange dollar to pounds",
+                "mona exchange pounds to euro",
+                "mona exchange pounds to dollar",
+                "mona play jazz",
+                "mona play latino",
+                "mona play rock",
+                "mona stop youtube"
             });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
             Grammar grammar = new Grammar(gBuilder);
-
+           
             recEngine.LoadGrammarAsync(grammar);
             //recEngine.RecognizeAsync(RecognizeMode.Multiple);
             recEngine.SpeechRecognized +=
@@ -100,13 +139,11 @@ namespace mps_proiect
 
         void SpeechRecognizedHandler(object sender, SpeechRecognizedEventArgs e)
         {
+            richTextBox1.Text += this.demoUsername + e.Result.Text + "\n";
             switch (e.Result.Text)
             {
-                case "mona print my name":
-                    richTextBox1.Text += "\nAmalia";
-                    break;
                 case "mona datetime please":
-                    //synthesizer.SpeakAsync(richTextBox1.SelectedText);
+                    richTextBox1.Text += this.monaUsername + DateTime.Now.ToString("yyyy, MM, dd, hh, mm") + "\n";
                     synthesizer.SpeakAsync(DateTime.Now.ToString("yyyy, MM, dd, hh, mm"));
                     break;
                 case "mona ip address":
@@ -121,25 +158,31 @@ namespace mps_proiect
                     }
                     if (ipAddress.Length != 0)
                     {
+                        richTextBox1.Text += this.monaUsername + "The ip address is " + ipAddress + "\n";
                         synthesizer.SpeakAsync("The ip address is " + ipAddress);
                     } else
                     {
+                        richTextBox1.Text += this.monaUsername + "No network adapters with an IPv4 address in the system!\n";
                         synthesizer.SpeakAsync("No network adapters with an IPv4 address in the system!");
                     }
                     break;
                 case "mona internet connection":
                     try
                     {
-                        Dns.GetHostEntry("www.google.com"); //using System.Net;
+                        Dns.GetHostEntry("www.google.com");
+                        richTextBox1.Text += this.monaUsername + "Yes, you are connected to internet.\n";
                         synthesizer.SpeakAsync("Yes, you are connected to internet");
                     }
                     catch (SocketException ex)
                     {
+                        richTextBox1.Text += this.monaUsername + "It looks like you have problems with internet connectivity.\n";
                         synthesizer.SpeakAsync("It looks like you have problems with internet connectivity.");
                     }
                     break;
                 case "goodbye mona":
+                    richTextBox1.Text += this.monaUsername + "Goodbye Amalia! Have a nice day!\n";
                     synthesizer.SpeakAsync("Goodbye Amalia! Have a nice day!");
+                    recEngine.RecognizeAsyncStop();
                     System.Threading.Thread.Sleep(5000);
                     Application.Exit();
                     break;
@@ -148,15 +191,15 @@ namespace mps_proiect
 
                     PowerStatus pwr = SystemInformation.PowerStatus;
                     batterystatus = SystemInformation.PowerStatus.BatteryChargeStatus.ToString();
-
+                    richTextBox1.Text += this.monaUsername + "battery charge status is" + batterystatus + "\n";
                     synthesizer.SpeakAsync("battery charge status is" + batterystatus);
                     break;
                 case "mona show image":
-                    richTextBox1.Text += "\nShow Image";
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Show image\n";
                     Process.Start("mspaint", @"""C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\9.jpg""");
                     break;
                 case "mona hide image":
-                    richTextBox1.Text += "\nHide Image";
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Hide image\n";
                     System.Diagnostics.Process[] procs = null;
           
                     procs = Process.GetProcessesByName("mspaint");
@@ -170,16 +213,16 @@ namespace mps_proiect
                         procs[0].Kill();
                     }
                     break;
-                case "mona play":
-                    richTextBox1.Text += "\nPlay";
+                case "mona play music":
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Play\n";
                     wplayer.controls.play();
                     break;
-                case "mona stop":
-                    richTextBox1.Text += "\nStop";
+                case "mona stop music":
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Stop\n";
                     wplayer.controls.pause();
                     break;
                 case "mona open chrome":
-                    richTextBox1.Text += "\nOpen chrome";
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Open chrome\n";
                     Process chromeProcess = new Process();
 
                     chromeProcess.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
@@ -188,18 +231,15 @@ namespace mps_proiect
                     chromeProcess.Start();
                     break;
                 case "mona close chrome":
-                    richTextBox1.Text += "\nClose chrome";
-                    Process[] chromeInstances = Process.GetProcessesByName("chrome");
-
-                    foreach (Process chromeProc in chromeInstances)
-                        chromeProc.Kill();
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Close chrome\n";
+                    this.closeChrome(richTextBox1, "chrome");
                     break;
                 case "mona open outlook":
-                    richTextBox1.Text += "\nOpen outlook";
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Open outlook\n";
                     Process.Start(@"C:\Program Files (x86)\Microsoft Office\root\Office16\OUTLOOK.EXE");
                     break;
                 case "mona close outlook":
-                    richTextBox1.Text += "\nClose outlook";
+                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Close outlook\n";
                     if (Process.GetProcessesByName("outlook").Length != 0)
                     {
                         foreach (var outlookProc in Process.GetProcessesByName("outlook"))
@@ -209,48 +249,76 @@ namespace mps_proiect
                     }
                     break;
                 case "mona exchange euro":
-                    richTextBox1.Text += "\n" + "One euro is " + ConvertCurrency("EUR", "RON") + " ron";
+                    richTextBox1.Text += this.monaUsername + "One euro is " + ConvertCurrency("EUR", "RON") + " ron\n";
                     synthesizer.SpeakAsync("One euro is " + ConvertCurrency("EUR","RON") + " ron");
                     break;
                 case "mona exchange dollar":
-                    richTextBox1.Text += "\n" + "One dollar is " + ConvertCurrency("USD", "RON") + " ron";
+                    richTextBox1.Text += this.monaUsername + "One dollar is " + ConvertCurrency("USD", "RON") + " ron\n";
                     synthesizer.SpeakAsync("One dollar is " + ConvertCurrency("USD", "RON") + " ron");
                     break;
                 case "mona exchange pounds":
+                    richTextBox1.Text += this.monaUsername + "One pound is " + ConvertCurrency("GBP", "RON") + " ron\n";
                     synthesizer.SpeakAsync("One pound is " + ConvertCurrency("GBP", "RON") + " ron");
                     break;
                 case "mona exchange ron to euro":
+                    richTextBox1.Text += this.monaUsername + "One ron is " + ConvertCurrency("RON", "EUR") + " euro\n";
                     synthesizer.SpeakAsync("One ron is " + ConvertCurrency("RON", "EUR") + " euro");
                     break;
                 case "mona exchange ron to dollar":
+                    richTextBox1.Text += this.monaUsername + "One ron is " + ConvertCurrency("RON", "USD") + " usd\n";
                     synthesizer.SpeakAsync("One ron is " + ConvertCurrency("RON", "USD") + " usd");
                     break;
                 case "mona exchange ron to pounds":
+                    richTextBox1.Text += this.monaUsername + "One ron is " + ConvertCurrency("RON", "GBP") + " pounds\n";
                     synthesizer.SpeakAsync("One ron is " + ConvertCurrency("RON", "GBP") + " pounds");
                     break;
                 case "mona exchange euro to dollar":
-                    richTextBox1.Text += "\n" + "One euro is " + ConvertCurrency("EUR", "USD") + " usd";
+                    richTextBox1.Text += this.monaUsername + "One euro is " + ConvertCurrency("EUR", "USD") + " usd\n";
                     synthesizer.SpeakAsync("One euro is " + ConvertCurrency("EUR", "USD") + " usd");
                     break;
                 case "mona exchange dollar to euro":
+                    richTextBox1.Text += this.monaUsername + "One usd is " + ConvertCurrency("USD", "EUR") + " euro\n";
                     synthesizer.SpeakAsync("One usd is " + ConvertCurrency("USD", "EUR") + " euro");
                     break;
                 case "mona exchange euro to pounds":
+                    richTextBox1.Text += this.monaUsername + "One euro is " + ConvertCurrency("EUR", "GBP") + " pounds\n";
                     synthesizer.SpeakAsync("One euro is " + ConvertCurrency("EUR", "GBP") + " pounds");
                     break;
                 case "mona exchange dollar to pounds":
+                    richTextBox1.Text += this.monaUsername + "One usd is " + ConvertCurrency("USD", "GBP") + " pounds\n";
                     synthesizer.SpeakAsync("One usd is " + ConvertCurrency("USD", "GBP") + " pounds");
                     break;
                 case "mona exchange pounds to euro":
+                    richTextBox1.Text += this.monaUsername + "One pound is " + ConvertCurrency("GBP", "EUR") + " euro\n";
                     synthesizer.SpeakAsync("One pound is " + ConvertCurrency("GBP", "EUR") + " euro");
                     break;
                 case "mona exchange pounds to dollar":
+                    richTextBox1.Text += this.monaUsername + "One pound is " + ConvertCurrency("GBP", "USD") + " usd\n";
                     synthesizer.SpeakAsync("One pound is " + ConvertCurrency("GBP", "USD") + " usd");
+                    break;
+                case "mona play jazz":
+                    richTextBox1.Text += this.monaUsername + "Enjoy the jazz music!\n";
+                    synthesizer.SpeakAsync("Enjoy the jazz music!");                   
+                    playOnYoutube("jazz", richTextBox1);
+                    break;
+                case "mona play latino":
+                    richTextBox1.Text += this.monaUsername + "Enjoy the latino music!\n";
+                    synthesizer.SpeakAsync("Enjoy the latino music!");
+                    playOnYoutube("latino", richTextBox1);
+                    break;
+                case "mona play rock":
+                    richTextBox1.Text += this.monaUsername + "Enjoy the rock music!\n";
+                    synthesizer.SpeakAsync("Enjoy the rock music!");
+                    playOnYoutube("rock", richTextBox1);
+                    break;
+                case "mona stop youtube":
+                    richTextBox1.Text += this.monaUsername + "Stop youtube\n";
+                    this.closeChrome(richTextBox1, "youtube");
                     break;
             }
         }
 
-        private void testButtonPlay_Click(object sender, EventArgs e)
+       /* private void testButtonPlay_Click(object sender, EventArgs e)
         {
             wplayer.controls.play();
         }
@@ -259,7 +327,7 @@ namespace mps_proiect
         {
             //wplayer.controls.stop();
             wplayer.controls.pause();
-        }
+        }*/
 
         public static String ConvertCurrency(string fromCurrency, string toCurrency)
         {
@@ -287,6 +355,59 @@ namespace mps_proiect
                 throw;
             }
         }
+
+        public void playOnYoutube(string searchedItem, RichTextBox richTextBox1)
+        {
+            VideoSearch items = new VideoSearch();
+            List<string> list = new List<string>();
+            
+            foreach (var item in items.SearchQuery(searchedItem, 1))
+            {  
+                list.Add(item.Url);               
+            }
+            Random rnd = new Random();
+            int randomVideoIndex = rnd.Next(list.Count);
+            
+            Process youtubeProcessInChrome = new Process();
+
+            youtubeProcessInChrome.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+            youtubeProcessInChrome.StartInfo.Arguments = list[randomVideoIndex];
+
+            youtubeProcessInChrome.Start();
+        }
+
+        public void closeChrome(RichTextBox richTextBox1, string chromeOrYoutube)
+        {
+            Process[] chromeInstances = Process.GetProcessesByName("chrome");
+            foreach (Process chromeProc in chromeInstances)
+            {
+                chromeProc.Kill();
+            }
+        }
+
+        private void infoCommands_Click(object sender, EventArgs e)
+        {
+            PopupForm popup = new PopupForm();
+            popup.Text = "How to use";
+            popup.VerticalScroll.Visible = true;
+            
+            popup.EnteredText += String.Join(Environment.NewLine, new List<string>{ "Commands:", ""});
+            popup.EnteredText += String.Join(Environment.NewLine, this.listOfCommands);
+            popup.Font = new Font(popup.Font, FontStyle.Italic);
+            DialogResult dialogresult = popup.ShowDialog();           
+            popup.Dispose();
+        }
+
+        private void aboutMona_Click(object sender, EventArgs e)
+        {
+            PopupForm popup = new PopupForm();
+            popup.Text = "About Mona";
+            popup.VerticalScroll.Visible = false;
+            popup.Font = new Font(popup.Font, FontStyle.Regular);
+
+            popup.EnteredText += "Acest produs software este dezvoltat de catre echipa Dreamteam si are ca scop indeplinirea unui set de comenzi vocale rostite de catre utilizator.";
+            DialogResult dialogresult = popup.ShowDialog();
+            popup.Dispose();
+        }
     }
 }
-

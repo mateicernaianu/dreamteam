@@ -50,3 +50,11 @@ E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\mps_proiect.exe
 E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\mps_proiect.pdb
 E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\Newtonsoft.Json.dll
 E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\YoutubeSearch.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\Interop.ShockwaveFlashObjects.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\Interop.ShockwaveFlashObjects.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\AxInterop.ShockwaveFlashObjects.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.PopupForm.resources

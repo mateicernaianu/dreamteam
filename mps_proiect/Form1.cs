@@ -92,7 +92,11 @@ namespace mps_proiect
                 "mona tell local weather",
                 "mona tell new york weather",
                 "mona tell chicago weather",
-                "mona tell paris weather"
+                "mona tell paris weather",
+                "mona where I am",
+                "mona where is new york",
+                "mona where is paris",
+                "mona where is chicago"
             };
 
             commands.Add(new string[] {
@@ -129,7 +133,11 @@ namespace mps_proiect
                 "mona tell local weather",
                 "mona tell new york weather",
                 "mona tell chicago weather",
-                "mona tell paris weather"
+                "mona tell paris weather",
+                "mona where I am",
+                "mona where is new york",
+                "mona where is paris",
+                "mona where is chicago"
             });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -141,9 +149,7 @@ namespace mps_proiect
               new EventHandler<SpeechRecognizedEventArgs>(
                 SpeechRecognizedHandler);
             recEngine.SetInputToDefaultAudioDevice();
-
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
-            richTextBox1.Text += getWeather("Iasi");
         }
 
         void SpeechRecognizedHandler(object sender, SpeechRecognizedEventArgs e)
@@ -325,34 +331,64 @@ namespace mps_proiect
                     this.closeChrome(richTextBox1, "youtube");
                     break;
                 case "mona tell local weather":
-                    richTextBox1.Text += this.monaUsername + "Bucharest: " + getWeather("Bucharest");
+                    richTextBox1.Text += this.monaUsername + "Bucharest: " + getWeather("Bucharest") + "\n";
                     synthesizer.SpeakAsync(getWeather("Bucharest"));
                     break;
                 case "mona tell new york weather":
-                    richTextBox1.Text += this.monaUsername + "New York: " + getWeather("New York");
+                    richTextBox1.Text += this.monaUsername + "New York: " + getWeather("New York") + "\n";
                     synthesizer.SpeakAsync(getWeather("New York"));
                     break;
                 case "mona tell paris weather":
-                    richTextBox1.Text += this.monaUsername + "Paris: " + getWeather("Paris");
+                    richTextBox1.Text += this.monaUsername + "Paris: " + getWeather("Paris") + "\n";
                     synthesizer.SpeakAsync(getWeather("Paris"));
                     break;
                 case "mona tell chicago weather":
-                    richTextBox1.Text += this.monaUsername + "Chicago: " + getWeather("Chicago");
+                    richTextBox1.Text += this.monaUsername + "Chicago: " + getWeather("Chicago") + "\n";
                     synthesizer.SpeakAsync(getWeather("Chicago"));
+                    break;
+                case "mona where I am":
+                    richTextBox1.Text += this.monaUsername + "You are in Buchares. Here is the map for you.\n";
+                    openMaps("Bucharest");
+                    synthesizer.SpeakAsync("You are in Buchares. Here is the map for you.");
+                    break;
+                case "mona where is new york":
+                    richTextBox1.Text += this.monaUsername + "Here is the map for you.\n";
+                    openMaps("New+York");
+                    synthesizer.SpeakAsync("Here is the map for you.");
+                    break;
+                case "mona where is paris":
+                    richTextBox1.Text += this.monaUsername + "Here is the map for you.\n";
+                    openMaps("Paris");
+                    synthesizer.SpeakAsync("Here is the map for you.");
+                    break;
+                case "mona where is chicago":
+                    richTextBox1.Text += this.monaUsername + "Here is the map for you.\n";
+                    openMaps("Chicago");
+                    synthesizer.SpeakAsync("Here is the map for you.");
                     break;
             }
         }
 
-       /* private void testButtonPlay_Click(object sender, EventArgs e)
+        /* private void testButtonPlay_Click(object sender, EventArgs e)
+         {
+             wplayer.controls.play();
+         }
+
+         private void testButtonStop_Click(object sender, EventArgs e)
+         {
+             //wplayer.controls.stop();
+             wplayer.controls.pause();
+         }*/
+        public static void openMaps(string location)
         {
-            wplayer.controls.play();
+            Process chromeProcess = new Process();
+
+            chromeProcess.StartInfo.FileName = @"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe";
+            chromeProcess.StartInfo.Arguments = "https://www.google.ro/maps/place/" + location + " --new-window";
+
+            chromeProcess.Start();
         }
 
-        private void testButtonStop_Click(object sender, EventArgs e)
-        {
-            //wplayer.controls.stop();
-            wplayer.controls.pause();
-        }*/
 
         public static String ConvertCurrency(string fromCurrency, string toCurrency)
         {

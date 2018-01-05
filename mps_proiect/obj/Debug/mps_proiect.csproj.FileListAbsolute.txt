@@ -64,3 +64,7 @@ E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\AxInterop.ShockwaveFlashObjects.
 E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\Interop.ShockwaveFlashObjects.dll
 E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\AxInterop.ShockwaveFlashObjects.dll
 E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\mps_proiect.PopupForm.resources
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.dll
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.Support.dll
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.xml
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.Support.xml

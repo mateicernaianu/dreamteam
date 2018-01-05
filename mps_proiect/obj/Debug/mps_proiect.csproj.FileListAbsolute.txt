@@ -58,3 +58,9 @@ C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\Interop.Sho
 C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
 C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\AxInterop.ShockwaveFlashObjects.dll
 C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\obj\Debug\mps_proiect.PopupForm.resources
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\YoutubeSearch.dll
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\Interop.ShockwaveFlashObjects.dll
+E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\Interop.ShockwaveFlashObjects.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\AxInterop.ShockwaveFlashObjects.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Debug\mps_proiect.PopupForm.resources

@@ -88,7 +88,12 @@ namespace mps_proiect
                 "mona play jazz",
                 "mona play latino",
                 "mona play rock",
-                "mona stop youtube" };
+                "mona stop youtube",
+                "mona tell local weather",
+                "mona tell new york weather",
+                "mona tell chicago weather",
+                "mona tell paris weather"
+            };
 
             commands.Add(new string[] {
                 "mona datetime please",
@@ -120,7 +125,11 @@ namespace mps_proiect
                 "mona play jazz",
                 "mona play latino",
                 "mona play rock",
-                "mona stop youtube"
+                "mona stop youtube",
+                "mona tell local weather",
+                "mona tell new york weather",
+                "mona tell chicago weather",
+                "mona tell paris weather"
             });
             GrammarBuilder gBuilder = new GrammarBuilder();
             gBuilder.Append(commands);
@@ -134,7 +143,7 @@ namespace mps_proiect
             recEngine.SetInputToDefaultAudioDevice();
 
             recEngine.RecognizeAsync(RecognizeMode.Multiple);
-            
+            richTextBox1.Text += getWeather("Iasi");
         }
 
         void SpeechRecognizedHandler(object sender, SpeechRecognizedEventArgs e)
@@ -315,6 +324,22 @@ namespace mps_proiect
                     richTextBox1.Text += this.monaUsername + "Stop youtube\n";
                     this.closeChrome(richTextBox1, "youtube");
                     break;
+                case "mona tell local weather":
+                    richTextBox1.Text += this.monaUsername + "Bucharest: " + getWeather("Bucharest");
+                    synthesizer.SpeakAsync(getWeather("Bucharest"));
+                    break;
+                case "mona tell new york weather":
+                    richTextBox1.Text += this.monaUsername + "New York: " + getWeather("New York");
+                    synthesizer.SpeakAsync(getWeather("New York"));
+                    break;
+                case "mona tell paris weather":
+                    richTextBox1.Text += this.monaUsername + "Paris: " + getWeather("Paris");
+                    synthesizer.SpeakAsync(getWeather("Paris"));
+                    break;
+                case "mona tell chicago weather":
+                    richTextBox1.Text += this.monaUsername + "Chicago: " + getWeather("Chicago");
+                    synthesizer.SpeakAsync(getWeather("Chicago"));
+                    break;
             }
         }
 
@@ -355,6 +380,37 @@ namespace mps_proiect
                 throw;
             }
         }
+
+        public static String getWeather(string city)
+        {
+            string apiKey = "8f5d06de227e024cd7ecb6a9b34e4db4";
+            string URL = String.Format("http://api.openweathermap.org/data/2.5/weather?mode=json&units=metric&q={0}&appid={1}", city, apiKey).ToString();
+
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(URL);
+            try
+            {
+                WebResponse response = request.GetResponse();
+                using (Stream responseStream = response.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.UTF8);
+                    JObject obj = (JObject)JsonConvert.DeserializeObject(reader.ReadLine().ToString());
+                    int degrees = (int) obj.SelectToken("main.temp");
+                    string conditionOutside = obj.SelectToken("weather[0].description").ToString();
+                    return conditionOutside + " and " + degrees + " celsius degrees";
+                }
+            }
+            catch (WebException ex)
+            {
+                WebResponse errorResponse = ex.Response;
+                using (Stream responseStream = errorResponse.GetResponseStream())
+                {
+                    StreamReader reader = new StreamReader(responseStream, Encoding.GetEncoding("utf-8"));
+                    String errorText = reader.ReadToEnd();
+                }
+                throw;
+            }
+        }
+
 
         public void playOnYoutube(string searchedItem, RichTextBox richTextBox1)
         {

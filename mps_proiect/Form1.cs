@@ -195,7 +195,7 @@ namespace mps_proiect
                     synthesizer.SpeakAsync("battery charge status is" + batterystatus);
                     break;
                 case "mona show image":
-                    richTextBox1.Text += richTextBox1.Text += this.monaUsername + "Show image\n";
+                    richTextBox1.Text += this.monaUsername + "Show image\n";
                     Process.Start("mspaint", @"""C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\9.jpg""");
                     break;
                 case "mona hide image":

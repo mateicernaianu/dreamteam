@@ -1,0 +1,10 @@
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\mps_proiect.csprojResolveAssemblyReference.cache
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.AXVLC.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.MediaPlayer.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.ShockwaveFlashObjects.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.WMLSS.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.WMPDXMLib.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.WMPLauncher.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.WMPLib.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\Interop.WMPNSSCI.dll
+E:\proiect2_mps\dreamteam\mps_proiect\obj\Release\AxInterop.ShockwaveFlashObjects.dll

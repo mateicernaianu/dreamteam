@@ -68,3 +68,7 @@ E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.dll
 E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.Support.dll
 E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.xml
 E:\proiect2_mps\dreamteam\mps_proiect\bin\Debug\WebDriver.Support.xml
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\WebDriver.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\WebDriver.Support.dll
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\WebDriver.xml
+C:\Users\Amalia\Desktop\mps_proiect2\dreamteam\mps_proiect\bin\Debug\WebDriver.Support.xml
